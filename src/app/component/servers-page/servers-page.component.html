@@ -1,0 +1,76 @@
+<div class="bg-light-sea absolute w-full h-full flex justify-center items-center">
+    <div class="container bg-white max-w-4xl  rounded-lg shadow-lg ">
+        <div class="flex justify-between rounded-t-lg bg-dark-teal">
+            <div class="p-5">
+                <h2 class="text-white font-bold text-lg">Server Manager</h2>
+            </div>
+            <div class="p-3 flex justify-between items-center gap-2">
+                <div>
+                    <select class="p-2 text-white bg-light-mint rounded-md">
+                        <option value="ALL">ALL</option>
+                        <option value="SERVER UP">SERVER UP</option>
+                        <option value="SERVER UP">SERVER DOWN</option>
+                    </select>
+                </div>
+                <div>
+                    <mat-dialog-actions>
+                        <button mat-raised-button class="p-2  text-white bg-green-500  hover:bg-green-600 duration-100 rounded-md" (click)="openDialog()">
+                            <fa-icon [icon]="faPlus"></fa-icon>
+                            Add Server </button>
+                    </mat-dialog-actions>
+                </div>
+                <div>
+                    <button class="p-2 text-white bg-sky-400 hover:bg-sky-500 duration-100 rounded-md  ">Modify Server </button>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
+            <ng-container *ngSwitchCase="'LOADING_STATE'" class="text-center mx-auto">
+                <mat-spinner diameter="40" classs="custom-spinner"></mat-spinner>
+            </ng-container>
+            <ng-container *ngSwitchCase="'ERROR_STATE'">
+                <div class="bg-red-100 rounded-lg p-5">
+                    <h2 class="text-white text-center">There is an error occured </h2>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="'LOADED_STATE'">
+                <table mat-table class="w-full mt-6 divide-y-2">
+                    <thead class="p-4  text-lg border-b-2 border-black">
+                        <tr>
+                            <th class="p-3 ">Image</th>
+                            <th class="p-3 ">IP Address</th>
+                            <th class="p-3 ">Name</th>
+                            <th class="p-3 ">Memory</th>
+                            <th class="p-3 ">Type</th>
+                            <th class="p-3 ">Status</th>
+                            <th class="p-3 ">Ping</th>
+                            <th class="p-3 ">Actions</th>
+                        </tr>
+                    </thead>
+            
+                    <tbody *ngFor="let data of appState.data?.data?.servers">
+                        <tr class="p-3 border-t-2 hover:bg-light-mint hover:text-white duration-100">
+                            <td class="p-5 text-center "><img [src]="data.imageUrl" /></td>
+                            <td class="p-5 text-center ">{{data.ipAddress}}</td>
+                            <td class="p-5 text-center ">{{data.name}}</td>
+                            <td class="p-5 text-center ">{{data.memory}}</td>
+                            <td class="p-5 text-center ">{{data.type}}</td>
+                            <td *ngIf="data.status ==='SERVER_UP'" class="p-5 text-center font-bold text-green-500">{{data.status}}</td>
+                            <td *ngIf="data.status ==='SERVER_DOWN'" class="p-5 text-center font-bold text-red-500">{{data.status}}</td>
+                            <td class="p-5 text-center"> 
+                                <mat-icon mat-fab extended class="cursor-pointer text-dark-teal hover:text-white">dns</mat-icon> 
+                            </td>
+                            <td class="p-5 text-center text-red-400 hover:text-red-500">
+                                <button mat-fab extended>
+                                    <mat-icon>delete</mat-icon>
+            
+                                </button>
+            
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>

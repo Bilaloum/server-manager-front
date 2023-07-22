@@ -1,0 +1,39 @@
+<button mat-icon-button class="float-right">
+    <mat-icon>close</mat-icon>
+</button>
+<h2 mat-dialog-title class="text-center">Add a server</h2>
+<mat-dialog-content>
+    
+    <mat-form-field class=" w-full focus:first-of-type:text-dark-teal focus:border-b-dark-teal">
+        <mat-label class="bg-green-400">Name</mat-label>
+        <input matInput/>
+    </mat-form-field>
+    
+    <mat-form-field class="w-full">
+        <mat-label>IP Address</mat-label>
+        <input matInput>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+        <mat-label>Memory</mat-label>
+        <input matInput>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+        <mat-label>Type</mat-label>
+        <input matInput>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+        <mat-label>Status</mat-label>
+        <input matInput>
+    </mat-form-field>
+    
+    <mat-form-field class="w-full">
+        <mat-label>Input</mat-label>
+        <input matInput>
+    </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="flex gap-2">
+    <button mat-button mat-dialog-close class="p-2 :bg-red-400 bg-red-400 hover:bg-red-500 text-white rounded-md shadow-md">Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="p-2 ps-4 pr-4 bg-green-400 hover:bg-green-500 text-white rounded-md shadow-md">Add</button>
+</mat-dialog-actions>
+
